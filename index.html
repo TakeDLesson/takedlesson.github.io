@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TakeDLesson — 1-on-1 Language Lessons, Live Online</title>
+<meta name="description" content="Live, one-on-one language lessons online. Pick your time, book your spot, start speaking.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15314D;
+    --paper:#F4FAFF;
+    --paper-dim:#E7F3FC;
+    --blue:#2EA1F2;
+    --blue-deep:#1C7FCC;
+    --coral:#FF7A59;
+    --sage:#3FBFA0;
+    --line:#CFE6F7;
+    --ink-soft:#4D6B85;
+    --max:1120px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit;}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+
+  :focus-visible{
+    outline:2.5px solid var(--coral);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,247,240,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:18px;padding-bottom:18px;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.25rem;
+    display:flex;align-items:center;gap:8px;
+    text-decoration:none;
+  }
+  .logo .dot{color:var(--coral);}
+  .navlinks{display:flex;gap:32px;align-items:center;}
+  .navlinks a{
+    text-decoration:none;font-size:0.95rem;font-weight:700;color:#000;
+    transition:color 0.15s ease;
+  }
+  .navlinks a:not(.nav-cta):hover{color:var(--blue-deep);}
+  .nav-cta{
+    background:var(--blue);color:#fff;
+    padding:10px 20px;border-radius:6px;
+    font-size:0.9rem;font-weight:600;
+    text-decoration:none;
+    transition:background 0.15s ease;
+  }
+  .nav-cta:hover{background:var(--blue-deep);}
+  .navlinks-mobile-toggle{display:none;}
+
+  @media (max-width:760px){
+    .navlinks{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:88px 0 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+  }
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:48px;}
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--sage);
+    margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{
+    content:'';width:7px;height:7px;border-radius:50%;
+    background:var(--sage);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,3.6rem);
+    line-height:1.05;
+    margin-bottom:24px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--coral);
+  }
+  .hero p.lede{
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    max-width:480px;
+    margin-bottom:34px;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--blue);color:#fff;
+    padding:15px 28px;border-radius:7px;
+    font-weight:600;font-size:0.98rem;
+    text-decoration:none;
+    display:inline-block;
+    transition:transform 0.15s ease, background 0.15s ease;
+    box-shadow:0 10px 24px -8px rgba(46,161,242,0.5);
+  }
+  .btn-primary:hover{background:var(--blue-deep);transform:translateY(-1px);}
+  .btn-secondary{
+    background:#fff;color:var(--ink);
+    padding:15px 28px;border-radius:7px;
+    border:1.5px solid var(--line);
+    font-weight:600;font-size:0.98rem;
+    text-decoration:none;
+    display:inline-block;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-secondary:hover{background:var(--paper-dim);border-color:var(--blue);}
+
+  /* ---------- Signature: dialogue transcript ---------- */
+  .transcript{
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:32px 28px;
+    position:relative;
+    box-shadow:0 24px 50px -24px rgba(46,161,242,0.35);
+  }
+  .transcript::before{
+    content:'';
+    position:absolute;
+    top:18px;right:18px;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--sage);
+    box-shadow:0 0 0 4px rgba(63,191,160,0.18);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 4px rgba(63,191,160,0.18);}
+    50%{box-shadow:0 0 0 7px rgba(63,191,160,0.28);}
+  }
+  .transcript-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:20px;
+  }
+  .line{
+    display:flex;
+    gap:14px;
+    margin-bottom:18px;
+    opacity:0;
+    animation:rise 0.5s ease forwards;
+  }
+  .line:nth-child(2){animation-delay:0.15s;}
+  .line:nth-child(3){animation-delay:0.55s;}
+  .line:nth-child(4){animation-delay:0.95s;}
+  .line:nth-child(5){animation-delay:1.35s;}
+  @keyframes rise{
+    from{opacity:0;transform:translateY(6px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .line{opacity:1;animation:none;}
+  }
+  .line .who{
+    flex-shrink:0;width:30px;height:30px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;font-weight:600;
+    color:#fff;
+  }
+  .line.tutor .who{background:var(--coral);}
+  .line.student .who{background:var(--sage);}
+  .line .bubble{
+    background:var(--paper-dim);
+    border-radius:4px 12px 12px 12px;
+    padding:10px 14px;
+    font-size:0.92rem;
+    color:var(--ink);
+    max-width:300px;
+  }
+  .line.student .bubble{
+    border-radius:12px 4px 12px 12px;
+    background:#EAF7F2;
+  }
+  .transcript-meta{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.75rem;
+    color:var(--ink-soft);
+    display:flex;justify-content:space-between;
+  }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--paper-dim);
+  }
+  .trust .wrap{
+    display:flex;flex-wrap:wrap;gap:36px;
+    padding:22px 28px;
+    justify-content:space-between;
+    font-size:0.88rem;
+    color:var(--ink-soft);
+  }
+  .trust span{display:flex;align-items:center;gap:8px;}
+  .trust span::before{content:'✓';color:var(--sage);font-weight:700;}
+
+  /* ---------- SECTION shared ---------- */
+  section{padding:96px 0;}
+  .section-head{
+    max-width:560px;
+    margin-bottom:56px;
+  }
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{
+    font-size:clamp(1.9rem,3.4vw,2.5rem);
+    margin-bottom:14px;
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+  }
+
+  /* ---------- CLASSES / PRICING ---------- */
+  #classes{background:var(--paper-dim);}
+  .plan-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  @media (max-width:860px){
+    .plan-grid{grid-template-columns:1fr;}
+  }
+  .plan{
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:32px 28px;
+    display:flex;flex-direction:column;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .plan:hover{border-color:var(--coral);transform:translateY(-3px);}
+  .plan.featured{
+    border-color:var(--blue);
+    position:relative;
+  }
+  .plan-tag{
+    position:absolute;top:-13px;left:28px;
+    background:var(--coral);
+    color:var(--ink);
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:5px 10px;
+    border-radius:4px;
+    font-weight:600;
+  }
+  .plan h3{
+    font-size:1.2rem;
+    margin-bottom:6px;
+  }
+  .plan .plan-sub{
+    color:var(--ink-soft);
+    font-size:0.92rem;
+    margin-bottom:22px;
+  }
+  .plan .price{
+    font-family:'Fraunces',serif;
+    font-size:2.4rem;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .plan .price sup{
+    font-size:1rem;
+    font-weight:500;
+    color:var(--ink-soft);
+    top:-1em;
+  }
+  .plan .price-note{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    margin-bottom:24px;
+  }
+  .plan ul{
+    list-style:none;
+    margin-bottom:28px;
+    flex-grow:1;
+  }
+  .plan ul li{
+    font-size:0.92rem;
+    color:var(--ink);
+    padding:7px 0;
+    display:flex;gap:10px;
+    border-top:1px solid var(--line);
+  }
+  .plan ul li:first-child{border-top:none;}
+  .plan ul li::before{content:'—';color:var(--coral);flex-shrink:0;}
+  .plan-btn{
+    text-align:center;
+    background:var(--blue);color:#fff;
+    padding:13px;border-radius:7px;
+    font-weight:600;font-size:0.92rem;
+    text-decoration:none;
+    transition:background 0.15s ease;
+  }
+  .plan-btn:hover{background:var(--blue-deep);}
+  .plan.soon{
+    opacity:0.6;
+  }
+  .plan.soon .plan-btn{
+    background:transparent;
+    border:1.5px solid var(--line);
+    color:var(--ink-soft);
+    cursor:default;
+  }
+  .plan.soon .plan-btn:hover{background:transparent;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:28px;
+  }
+  @media (max-width:860px){
+    .steps{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .steps{grid-template-columns:1fr;}
+  }
+  .step .num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.85rem;
+    color:var(--coral);
+    margin-bottom:14px;
+  }
+  .step h4{
+    font-family:'Fraunces',serif;
+    font-size:1.1rem;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .step p{
+    color:var(--ink-soft);
+    font-size:0.92rem;
+  }
+
+  /* ---------- ABOUT ---------- */
+  #about{background:var(--paper-dim);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:56px;
+    align-items:start;
+  }
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+  .about-card{
+    background:linear-gradient(145deg, var(--blue) 0%, var(--blue-deep) 100%);
+    color:#fff;
+    border-radius:14px;
+    padding:36px 30px;
+  }
+  .about-card .quote-mark{
+    font-family:'Fraunces',serif;
+    font-size:3.5rem;
+    color:#FFE3D6;
+    line-height:0.6;
+    margin-bottom:10px;
+  }
+  .about-card p{
+    font-size:1.05rem;
+    line-height:1.6;
+    color:#EAF6FF;
+  }
+  .about-text p{
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    margin-bottom:18px;
+  }
+  .about-text strong{color:var(--ink);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+  }
+  @media (max-width:860px){
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  .contact-list{list-style:none;}
+  .contact-list li{
+    padding:18px 0;
+    border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:0.98rem;
+  }
+  .contact-list li:first-child{border-top:none;}
+  .contact-list .label{color:var(--ink-soft);font-size:0.88rem;}
+  .contact-list a{text-decoration:none;font-weight:600;color:var(--ink);}
+  .contact-list a:hover{color:var(--coral);}
+
+  form.contact-form{display:flex;flex-direction:column;gap:16px;}
+  .field label{
+    display:block;font-size:0.85rem;font-weight:600;margin-bottom:6px;color:var(--ink);
+  }
+  .field input,.field textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1.5px solid var(--line);
+    border-radius:7px;
+    font-family:'Inter',sans-serif;
+    font-size:0.95rem;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .field input:focus,.field textarea:focus{
+    outline:none;
+    border-color:var(--coral);
+  }
+  .field textarea{resize:vertical;min-height:100px;}
+  .form-submit{
+    margin-top:6px;
+    background:var(--coral);color:#fff;
+    border:none;
+    padding:15px;border-radius:7px;
+    font-weight:600;font-size:0.98rem;
+    cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .form-submit:hover{background:#FF6238;}
+  .form-note{font-size:0.82rem;color:var(--ink-soft);margin-top:-4px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--blue-deep);
+    color:#D4ECFB;
+    padding:48px 0 32px;
+  }
+  .footer-grid{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    flex-wrap:wrap;gap:24px;
+    margin-bottom:32px;
+  }
+  .footer-logo{
+    font-family:'Fraunces',serif;
+    font-size:1.15rem;
+    color:#fff;
+    margin-bottom:8px;
+  }
+  .footer-logo .dot{color:var(--coral);}
+  .footer-links{display:flex;gap:28px;flex-wrap:wrap;}
+  .footer-links a{
+    color:#D4ECFB;text-decoration:none;font-size:0.9rem;
+    transition:color 0.15s ease;
+  }
+  .footer-links a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:24px;
+    font-size:0.82rem;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo">TakeDLesson<span class="dot">.</span></a>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#how">How it works</a>
+      <a href="#classes">Lessons</a>
+      <a href="#classes" class="nav-cta">Book a lesson</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Live · <span style="white-space:nowrap">1-on-1</span> · online</div>
+        <h1>Learn to speak it,<br>not just <em>study</em> it.</h1>
+        <p class="lede">Book a private language lesson with a real tutor, on your schedule. Pick a time, pay securely, and join from anywhere — no app to install, no classroom to find.</p>
+        <div class="hero-ctas">
+          <a href="#classes" class="btn-primary">See lessons &amp; pricing</a>
+          <a href="#how" class="btn-secondary">How it works</a>
+        </div>
+      </div>
+
+      <div class="transcript" role="img" aria-label="Sample exchange between a tutor and a student during a live lesson">
+        <div class="transcript-label">live session — excerpt</div>
+        <div class="line tutor">
+          <div class="who">T</div>
+          <div class="bubble">¿Cómo describirías tu trabajo ideal?</div>
+        </div>
+        <div class="line student">
+          <div class="who">S</div>
+          <div class="bubble">Creo que... sería algo creativo, ¿está bien dicho?</div>
+        </div>
+        <div class="line tutor">
+          <div class="who">T</div>
+          <div class="bubble">Casi — "creo que sería" funciona mejor. ¡Buen intento!</div>
+        </div>
+        <div class="line student">
+          <div class="who">S</div>
+          <div class="bubble">Ah, entiendo. Gracias.</div>
+        </div>
+        <div class="transcript-meta">
+          <span>Spanish · conversational</span>
+          <span>23:14</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust">
+    <div class="wrap">
+      <span>Real tutor, live video</span>
+      <span>Book in under 2 minutes</span>
+    </div>
+  </div>
+
+  <!-- CLASSES / PRICING -->
+  <section id="classes">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Lessons</div>
+        <h2>Two ways to learn, always one-on-one.</h2>
+        <p>Pick conversation practice or a structured lesson with homework — whichever fits where you are right now.</p>
+      </div>
+
+      <div class="plan-grid">
+        <div class="plan">
+          <h3>Conversational</h3>
+          <p class="plan-sub">Talk, listen, build confidence</p>
+          <div class="price">$15<sup>/hr</sup></div>
+          <div class="price-note">60 minutes · live, <span style="white-space:nowrap">1-on-1</span></div>
+          <ul>
+            <li>Free-flowing conversation practice</li>
+            <li>Real-time corrections as you speak</li>
+            <li>Great for building fluency &amp; confidence</li>
+          </ul>
+          <a href="https://calendar.app.google/5A5y8mLnPzDwQuLr7" class="plan-btn" target="_blank" rel="noopener">Book conversational lesson</a>
+        </div>
+
+        <div class="plan featured">
+          <div class="plan-tag">Most booked</div>
+          <h3>Individual Tutoring</h3>
+          <p class="plan-sub">A full, structured lesson</p>
+          <div class="price">$25<sup>/hr</sup></div>
+          <div class="price-note">60 minutes · live, <span style="white-space:nowrap">1-on-1</span></div>
+          <ul>
+            <li>Grammar &amp; structured lesson plan</li>
+            <li>Homework &amp; practice between sessions</li>
+            <li>Progress tracked toward your goals</li>
+          </ul>
+          <a href="#contact" class="plan-btn">Book tutoring lesson</a>
+        </div>
+
+        <div class="plan soon">
+          <h3>Lesson Bundle</h3>
+          <p class="plan-sub">Coming soon</p>
+          <div class="price">—</div>
+          <div class="price-note">Pricing to be announced</div>
+          <ul>
+            <li>Discounted rate per lesson</li>
+            <li>Priority scheduling</li>
+            <li>Flexible rescheduling</li>
+          </ul>
+          <span class="plan-btn">Available soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Process</div>
+        <h2>From booking to your first lesson.</h2>
+        <p>Four steps, no account required to get started.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">01</div>
+          <h4>Pick a time</h4>
+          <p>Choose a lesson type and a slot that fits your schedule.</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h4>Pay securely</h4>
+          <p>Complete checkout online — your spot is confirmed instantly.</p>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <h4>Get your link</h4>
+          <p>A confirmation email arrives with everything you need to join.</p>
+        </div>
+        <div class="step">
+          <div class="num">04</div>
+          <h4>Show up &amp; talk</h4>
+          <p>Join the live video call at your scheduled time. That's it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-card">
+        <div class="quote-mark">&ldquo;</div>
+        <p>Lessons are about being understood, mistakes and all. Every session is built around your level, your goals, and the words you actually need.</p>
+      </div>
+      <div class="about-text">
+        <div class="eyebrow">About</div>
+        <h2>Why TakeDLesson</h2>
+        <p><strong>TakeDLesson started with one subject: real conversation in a new language.</strong> Every lesson is one-on-one and fully live — no pre-recorded videos, no algorithm deciding what you study next.</p>
+        <p>We're starting with language lessons, with more subjects and lesson formats planned as we grow. Booking stays simple either way: pick a time, pay online, and show up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:32px;">
+          <div class="eyebrow">Contact</div>
+          <h2>Questions before you book?</h2>
+          <p>Send a message using the form and we'll reply within a day.</p>
+        </div>
+        <ul class="contact-list">
+          <li>
+            <span class="label">Response time</span>
+            <span>Within 24 hours</span>
+          </li>
+          <li>
+            <span class="label">Lessons available</span>
+            <span>7 days a week</span>
+          </li>
+        </ul>
+      </div>
+
+      <form class="contact-form" onsubmit="return false;">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="What would you like to know?" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send message</button>
+        <p class="form-note">This form is a placeholder for now — it isn't connected to email yet. We'll wire that up in a later step.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">TakeDLesson<span class="dot">.</span></div>
+        <div style="font-size:0.85rem;">Live, <span style="white-space:nowrap">1-on-1</span> language lessons — online.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#classes">Lessons</a>
+        <a href="#how">How it works</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 TakeDLesson. All rights reserved.</span>
+      <span>Made for learning, one lesson at a time.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
